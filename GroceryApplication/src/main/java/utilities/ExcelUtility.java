@@ -1,0 +1,57 @@
+package utilities;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import constant.Constant;
+
+public class ExcelUtility {
+
+	static FileInputStream f; //used to input a file
+
+	static XSSFWorkbook w; //used to fetch a workbook from the file
+
+	static XSSFSheet s; //used to input an excel sheet
+	
+
+	public static String getStringData(int a,int b,String sheet) throws IOException
+	{
+
+		f=new FileInputStream(Constant.TESTDATA);
+
+		w=new XSSFWorkbook(f);
+
+		s=w.getSheet(sheet);
+
+		XSSFRow r=s.getRow(a);
+
+		XSSFCell c=r.getCell(b);
+
+		return c.getStringCellValue();
+
+	}
+
+	public static int getIntegerData(int a,int b,String sheet) throws IOException 
+	{
+
+		f=new FileInputStream(Constant.TESTDATA);
+
+		w=new XSSFWorkbook(f);
+
+		s=w.getSheet(sheet);
+
+		XSSFRow r=s.getRow(a);
+
+		XSSFCell c=r.getCell(b);
+
+		int y=(int) c.getNumericCellValue(); //type casting - conversion of data from one type to another [ double to int ].
+
+		return y;
+		
+	}
+}
